@@ -1,7 +1,7 @@
 {
-  "name": "your-app",
-  "description": "Description",
-  "author": "Your Name",
+  "name": "reception-frontdesk",
+  "description": "Reception Frontdesk",
+  "author": "Anatoli Lazar",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -16,8 +16,9 @@
   },
   "dependencies": {
     "backbone": "~1.3.3",
-    "backbone.marionette": "~3.0.0",
-    "jquery": "~1.12.2",
+    "backbone.marionette": "~3.3.1",
+    "backbone.localstorage": "~2.0.0",
+    "jquery": "~3.2.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
