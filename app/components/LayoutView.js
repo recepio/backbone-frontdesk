@@ -32,8 +32,8 @@ export default Marionette.View.extend({
   },
 
   removeItem() {
-    const selectedChecks = this.checkCollectionView.selectionCollection;
-    selectedChecks.forEach(model => model.get('view').model.destroy());
+    const selectedChecks = this.checkCollectionView.selectionCollection.getSelected();
+    this.checkCollection.remove(selectedChecks);
     console.log(selectedChecks.length);
   },
 

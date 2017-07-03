@@ -3,6 +3,9 @@ import SelectionCollection from '../collections/SelectionCollection';
 
 export default Marionette.CollectionView.extend({
   selectionCollection: new SelectionCollection,
+  collectionEvents: {
+    remove: 'removed'
+  },
 
   initialize() {
     this.listenTo(this.selectionCollection, 'add', this.addedSelection);
@@ -14,5 +17,12 @@ export default Marionette.CollectionView.extend({
 
   addedSelection(model) {
     model.get('view').$el.toggleClass('selected', true);
+  },
+
+  removed(model) {
+    const foundModel = this.selectionCollection.find(selectionModel => selectionModel.get('view').model === model);
+    if (foundModel) {
+      foundModel.destroy();
+    }
   }
 });
