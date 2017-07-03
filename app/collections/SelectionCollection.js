@@ -5,6 +5,6 @@ export default Backbone.Collection.extend({
   model: Range,
 
   getSelected() {
-    return this.map(model => model.get('view').model);
+    return this.map(model => model.get('model'));
   }
 });
