@@ -1,7 +1,9 @@
 import Backbone from 'backbone';
 
 export default Backbone.Model.extend({
-  defaults: {
-    start: new Date()
+  defaults() {
+    return {
+      start: new Date()
+    }
   }
 });
