@@ -1,7 +1,7 @@
-import Marionette from 'backbone.marionette';
+import ItemView from './ItemView';
 import template from '../templates/checkitem.jst';
 
-export default Marionette.View.extend({
+export default ItemView.extend({
   tagName: 'tr',
   template: template
 });

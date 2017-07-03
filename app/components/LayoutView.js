@@ -21,7 +21,9 @@ export default Marionette.View.extend({
 
     this.checkCollection.fetch();
     if (!this.checkCollection.length) {
-      this.checkCollection.create();
+      for (let i = 0; i < 100; i++) {
+        this.checkCollection.create();
+      }
     }
   }
 });
