@@ -1,12 +1,12 @@
 import TableView from './TableView';
-import ServiceCollectionView from './ServiceCollectionView';
-import template from '../templates/services.jst';
+import CheckCollectionView from './CheckCollectionView';
+import template from '../templates/checks.jst';
 
 export default TableView.extend({
   template: template,
 
   onRender: function() {
-    this.showChildView('body', new ServiceCollectionView({
+    this.showChildView('body', new CheckCollectionView({
       collection: this.collection,
       selectionCollection: this.options.selectionCollection
     }));

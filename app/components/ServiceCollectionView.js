@@ -1,6 +1,6 @@
 import TableCollectionView from './TableCollectionView';
-import ServiceItemView from './ServiceItemView';
+import ServiceRowView from './ServiceRowView';
 
 export default TableCollectionView.extend({
-  childView: ServiceItemView
+  childView: ServiceRowView
 });

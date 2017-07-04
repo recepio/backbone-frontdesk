@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import CheckCollection from '../collections/CheckCollection';
 import HeaderView from './HeaderView';
-import CheckCollectionView from './CheckCollectionView';
+import CheckTableView from './CheckTableView';
 import ServiceTableView from './ServiceTableView';
 import SelectionCollection from '../collections/SelectionCollection';
 import template from '../templates/layout.jst';
@@ -18,11 +18,11 @@ export default Marionette.View.extend({
   initialize() {
     this.checkCollection = new CheckCollection;
     this.selectionCollection = new SelectionCollection;
-    this.checkCollectionView1 = new CheckCollectionView({
+    this.checkTableView1 = new CheckTableView({
       collection: this.checkCollection,
       selectionCollection: this.selectionCollection
     });
-    this.checkCollectionView2 = new CheckCollectionView({
+    this.checkTableView2 = new CheckTableView({
       collection: this.checkCollection,
       selectionCollection: this.selectionCollection
     });
@@ -30,8 +30,8 @@ export default Marionette.View.extend({
 
   onRender() {
     this.showChildView('header', new HeaderView());
-    this.showChildView('checks1', this.checkCollectionView1);
-    this.showChildView('checks2', this.checkCollectionView2);
+    this.showChildView('checks1', this.checkTableView1);
+    this.showChildView('checks2', this.checkTableView2);
     this.showChildView('services', new ServiceTableView);
 
     this.checkCollection.fetch();

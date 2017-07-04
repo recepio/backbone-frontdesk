@@ -1,7 +1,6 @@
-import CollectionView from './CollectionView';
-import CheckItemView from './CheckItemView';
+import TableCollectionView from './TableCollectionView';
+import CheckRowView from './CheckRowView';
 
-export default CollectionView.extend({
-  childView: CheckItemView,
-  tagName: 'table'
+export default TableCollectionView.extend({
+  childView: CheckRowView
 });
