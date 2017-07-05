@@ -1,4 +1,4 @@
-import TableCollectionView from './TableCollectionView';
+import TableCollectionView from '../core/TableCollectionView';
 import CheckRowView from './CheckRowView';
 
 export default TableCollectionView.extend({

@@ -1,4 +1,4 @@
-import TableView from './TableView';
+import TableView from '../core/TableView';
 import CheckCollectionView from './CheckCollectionView';
 import template from '../templates/checks.jst';
 

@@ -1,4 +1,4 @@
-import TableView from './TableView';
+import TableView from '../core/TableView';
 import ServiceCollectionView from './ServiceCollectionView';
 import template from '../templates/services.jst';
 
