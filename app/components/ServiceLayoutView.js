@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import ServiceCollection from '../collections/ServiceCollection';
 import HeaderView from './HeaderView';
 import ServiceTableView from './ServiceTableView';
-import SelectionCollection from '../collections/SelectionCollection';
+import Selection from '../core/Selection';
 import template from '../templates/service-layout.jst';
 
 export default Marionette.View.extend({
@@ -14,10 +14,10 @@ export default Marionette.View.extend({
 
   initialize() {
     this.serviceCollection = new ServiceCollection;
-    this.selectionCollection = new SelectionCollection;
+    this.selection = new Selection;
     this.serviceTableView = new ServiceTableView({
       collection: this.serviceCollection,
-      selectionCollection: this.selectionCollection
+      selection: this.selection
     });
   },
 
@@ -35,8 +35,10 @@ export default Marionette.View.extend({
   },
 
   removeItem() {
-    const selected = this.selectionCollection.getSelected();
-    _.each(selected, model => model.destroy());
+    let model;
+    while (model = this.selection.getSelected().first()) {
+      model.destroy();
+    }
   },
 
   onChildviewCreateItem() {

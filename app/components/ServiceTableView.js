@@ -8,7 +8,7 @@ export default TableView.extend({
   onRender: function() {
     this.showChildView('body', new ServiceCollectionView({
       collection: this.collection,
-      selectionCollection: this.options.selectionCollection
+      selection: this.options.selection
     }));
   }
 });

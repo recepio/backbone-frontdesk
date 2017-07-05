@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import CheckCollection from '../collections/CheckCollection';
 import HeaderView from './HeaderView';
 import CheckTableView from './CheckTableView';
-import SelectionCollection from '../collections/SelectionCollection';
+import Selection from '../core/Selection';
 import template from '../templates/check-layout.jst';
 
 export default Marionette.View.extend({
@@ -15,14 +15,14 @@ export default Marionette.View.extend({
 
   initialize() {
     this.checkCollection = new CheckCollection;
-    this.selectionCollection = new SelectionCollection;
+    this.selection = new Selection;
     this.checkTableView1 = new CheckTableView({
       collection: this.checkCollection,
-      selectionCollection: this.selectionCollection
+      selection: this.selection
     });
     this.checkTableView2 = new CheckTableView({
       collection: this.checkCollection,
-      selectionCollection: this.selectionCollection
+      selection: this.selection
     });
   },
 
@@ -41,8 +41,10 @@ export default Marionette.View.extend({
   },
 
   removeItem() {
-    const selected = this.selectionCollection.getSelected();
-    _.each(selected, model => model.destroy());
+    let model;
+    while (model = this.selection.getSelected().first()) {
+      model.destroy();
+    }
   },
 
   onChildviewCreateItem() {

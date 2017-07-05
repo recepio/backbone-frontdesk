@@ -1,8 +1,15 @@
 import Marionette from 'backbone.marionette';
 
 export default Marionette.View.extend({
+  attributes: {
+    tabindex: 0
+  },
   triggers: {
-    'click': 'select:item'
+    'click': 'click:item'
+  },
+
+  setCurrent() {
+    this.$el.focus();
   },
 
   setSelected(selected) {

@@ -8,7 +8,7 @@ export default TableView.extend({
   onRender: function() {
     this.showChildView('body', new CheckCollectionView({
       collection: this.collection,
-      selectionCollection: this.options.selectionCollection
+      selection: this.options.selection
     }));
   }
 });

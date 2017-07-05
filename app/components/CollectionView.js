@@ -1,5 +1,4 @@
 import Marionette from 'backbone.marionette';
-import SelectionCollection from '../collections/SelectionCollection';
 
 export default Marionette.CollectionView.extend({
   collectionEvents: {
@@ -7,32 +6,41 @@ export default Marionette.CollectionView.extend({
   },
 
   initialize(options) {
-    this.selectionCollection = options.selectionCollection ? options.selectionCollection : new SelectionCollection;
-    this.listenTo(this.selectionCollection, 'add', this.addedSelection);
-    this.listenTo(this.selectionCollection, 'remove', this.removedSelection);
-  },
-
-  onChildviewSelectItem(childView) {
-    let model;
-    while (model = this.selectionCollection.first()) {
-      model.destroy();
+    if (options.selection) {
+      this.selection = options.selection;
+      this.selection.collection = this.collection;
+      this.listenTo(this.selection, 'current', this.onCurrent);
+      this.listenTo(this.selection, 'select', this.onSelect);
     }
-    this.selectionCollection.add({model: childView.model});
   },
 
-  addedSelection(model) {
-    this.children.findByModel(model.get('model')).setSelected(true);
+  onChildviewClickItem(childView, event) {
+    if (this.selection) {
+      if (!event.ctrlKey) {
+        let model;
+        while (model = this.selection.getSelected().first()) {
+          this.selection.deselect(model);
+        }
+      }
+      this.selection.select(childView.model);
+    }
   },
 
-  removedSelection(model) {
-    console.log('removed');
-    this.children.findByModel(model.get('model')).setSelected(false);
+  onCurrent(model) {
+    console.log('onCurrent');
+    if (model) {
+      this.children.findByModel(model).setCurrent();
+    }
+  },
+
+  onSelect(model, selected) {
+    console.log('onSelect', selected);
+    this.children.findByModel(model).setSelected(selected);
   },
 
   removed(model) {
-    const foundModel = this.selectionCollection.find(selectionModel => selectionModel.get('model') === model);
-    if (foundModel) {
-      foundModel.destroy();
+    if (this.selection) {
+      this.selection.deselect(model);
     }
   }
 });
