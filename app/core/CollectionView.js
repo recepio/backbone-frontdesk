@@ -2,13 +2,13 @@ import Marionette from 'backbone.marionette';
 
 export default Marionette.CollectionView.extend({
   collectionEvents: {
-    beforeRemove: 'onBeforeRemove'
+    beforeRemove: 'onBeforeRemove',
+    remove: 'onRemove'
   },
 
   initialize(options) {
     if (options.selection) {
       this.selection = options.selection;
-      this.selection.collection = this.collection;
       this.listenTo(this.selection, 'current', this.onCurrent);
       this.listenTo(this.selection, 'select', this.onSelect);
     }
@@ -41,6 +41,19 @@ export default Marionette.CollectionView.extend({
   onBeforeRemove(model) {
     if (this.selection) {
       this.selection.deselect(model);
+    }
+  },
+
+  onRemove(model, collection, options) {
+    if (this.selection) {
+      _.defer(() => {
+        let position = options.index - 1;
+        if (position < 0) {
+          position = 0;
+        }
+        const current = this.collection.length ? this.collection.at(position) : null;
+        this.selection.select(current);
+      });
     }
   }
 });
