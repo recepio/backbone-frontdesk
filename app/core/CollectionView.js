@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 
 export default Marionette.CollectionView.extend({
   collectionEvents: {
-    remove: 'removed'
+    beforeRemove: 'onBeforeRemove'
   },
 
   initialize(options) {
@@ -38,7 +38,7 @@ export default Marionette.CollectionView.extend({
     this.children.findByModel(model).setSelected(selected);
   },
 
-  removed(model) {
+  onBeforeRemove(model) {
     if (this.selection) {
       this.selection.deselect(model);
     }

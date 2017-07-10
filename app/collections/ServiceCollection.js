@@ -1,8 +1,8 @@
-import Backbone from 'backbone';
+import Collection from '../core/Collection';
 import {LocalStorage} from 'backbone.localstorage';
 import Service from '../models/Service';
 
-export default Backbone.Collection.extend({
+export default Collection.extend({
   model: Service,
   localStorage: new LocalStorage('services')
 });
