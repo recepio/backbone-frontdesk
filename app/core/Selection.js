@@ -5,7 +5,10 @@ export default Marionette.Object.extend({
     this.selection = [];
   },
 
-  select(model) {
+  select(model, clear = true) {
+    if (clear) {
+      this.clear();
+    }
     this.current = model;
     this.triggerMethod('current', model);
     if (model) {

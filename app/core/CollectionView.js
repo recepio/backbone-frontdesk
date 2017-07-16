@@ -19,7 +19,7 @@ export default Marionette.CollectionView.extend({
       if (!event.ctrlKey) {
         this.selection.clear();
       }
-      this.selection.select(childView.model);
+      this.selection.select(childView.model, false);
     }
   },
 

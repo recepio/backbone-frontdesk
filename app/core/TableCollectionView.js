@@ -33,7 +33,6 @@ export default CollectionView.extend({
           current = this.getNextModel(current);
         }
         if (current) {
-          this.selection.clear();
           this.selection.select(current);
           event.preventDefault();
         }

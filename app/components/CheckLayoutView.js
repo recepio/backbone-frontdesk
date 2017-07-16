@@ -37,7 +37,8 @@ export default Marionette.View.extend({
   },
 
   createItem() {
-    this.checkCollection.create();
+    const model = this.checkCollection.create();
+    this.selection.select(model);
   },
 
   removeItem() {
