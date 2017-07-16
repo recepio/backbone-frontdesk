@@ -17,10 +17,7 @@ export default Marionette.CollectionView.extend({
   onChildviewClickItem(childView, event) {
     if (this.selection) {
       if (!event.ctrlKey) {
-        let model;
-        while (model = this.selection.getSelected().first()) {
-          this.selection.deselect(model);
-        }
+        this.selection.clear();
       }
       this.selection.select(childView.model);
     }
@@ -47,9 +44,9 @@ export default Marionette.CollectionView.extend({
   onRemove(model, collection, options) {
     if (this.selection) {
       _.defer(() => {
-        let position = options.index - 1;
-        if (position < 0) {
-          position = 0;
+        let position = options.index;
+        if (position >= this.collection.length) {
+          position = this.collection.length - 1;
         }
         const current = this.collection.length ? this.collection.at(position) : null;
         this.selection.select(current);

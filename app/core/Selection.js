@@ -22,6 +22,13 @@ export default Marionette.Object.extend({
     this.triggerMethod('select', model, false);
   },
 
+  clear() {
+    for (const model of this.selection) {
+      this.triggerMethod('select', model, false);
+    }
+    this.selection = [];
+  },
+
   getSelected() {
     return _(this.selection);
   }
