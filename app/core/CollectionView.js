@@ -19,6 +19,14 @@ export default Marionette.CollectionView.extend({
       if (!event.ctrlKey) {
         this.selection.clear();
       }
+      if (event.shiftKey) {
+        const beginPosition = this.collection.indexOf(this.selection.current);
+        const endPosition = this.collection.indexOf(childView.model);
+        console.log(beginPosition, endPosition);
+        for (let i = Math.min(beginPosition, endPosition); i <= Math.max(beginPosition, endPosition); i++) {
+          this.selection.select(this.collection.at(i), false);
+        }
+      }
       this.selection.select(childView.model, false);
     }
   },
