@@ -61,7 +61,8 @@ switch (process.env.npm_lifecycle_event) {
     module.exports = merge(webpackCommon, {
       devtool: '#inline-source-map',
       devServer: {
-        inline: true
+        inline: true,
+        historyApiFallback: true
       }
     });
     break;
