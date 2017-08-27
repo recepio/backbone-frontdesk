@@ -11,6 +11,10 @@ export default Marionette.View.extend({
     header: 'header',
     services: '.services'
   },
+  childViewEvents: {
+    'create:item': 'createItem',
+    'remove:item': 'removeItem'
+  },
 
   initialize() {
     this.serviceCollection = new ServiceCollection;
@@ -36,16 +40,8 @@ export default Marionette.View.extend({
 
   removeItem() {
     let model;
-    while (model = this.selection.getSelected().first()) {
+    while ((model = this.selection.getSelected().first())) {
       model.destroy();
     }
-  },
-
-  onChildviewCreateItem() {
-    this.createItem();
-  },
-
-  onChildviewRemoveItem() {
-    this.removeItem();
   }
 });

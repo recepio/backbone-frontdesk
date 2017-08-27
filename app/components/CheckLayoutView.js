@@ -12,6 +12,10 @@ export default Marionette.View.extend({
     checks1: '.checks1',
     checks2: '.checks2'
   },
+  childViewEvents: {
+    'create:item': 'createItem',
+    'remove:item': 'removeItem'
+  },
 
   initialize() {
     this.checkCollection = new CheckCollection;
@@ -43,16 +47,8 @@ export default Marionette.View.extend({
 
   removeItem() {
     let model;
-    while (model = this.selection.getSelected().first()) {
+    while ((model = this.selection.getSelected().first())) {
       model.destroy();
     }
-  },
-
-  onChildviewCreateItem() {
-    this.createItem();
-  },
-
-  onChildviewRemoveItem() {
-    this.removeItem();
   }
 });
