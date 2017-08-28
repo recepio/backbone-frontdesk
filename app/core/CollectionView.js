@@ -16,7 +16,7 @@ export default Marionette.CollectionView.extend({
 
   onChildviewClickItem(childView, event) {
     if (this.selection) {
-      if (!event.ctrlKey) {
+      if (!event.ctrlKey && !event.metaKey) {
         this.selection.clear();
       }
       if (event.shiftKey) {
