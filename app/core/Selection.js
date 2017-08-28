@@ -9,8 +9,9 @@ export default Marionette.Object.extend({
     if (clear) {
       this.clear();
     }
+    this.triggerMethod('current', this.current, false);
     this.current = model;
-    this.triggerMethod('current', model);
+    this.triggerMethod('current', model, true);
     if (model) {
       this.selection.push(model);
       this.triggerMethod('select', model, true);
@@ -26,9 +27,7 @@ export default Marionette.Object.extend({
   },
 
   clear() {
-    for (const model of this.selection) {
-      this.triggerMethod('select', model, false);
-    }
+    this.selection.forEach(model => this.triggerMethod('select', model, false));
     this.selection = [];
   },
 

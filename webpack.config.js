@@ -62,7 +62,9 @@ switch (process.env.npm_lifecycle_event) {
       devtool: '#inline-source-map',
       devServer: {
         inline: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        host: '0.0.0.0',
+        disableHostCheck: true
       }
     });
     break;

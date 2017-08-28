@@ -25,7 +25,7 @@ export default CollectionView.extend({
   onKeydown(event) {
     console.log(event.which);
     if (this.selection) {
-      if ([38, 40].includes(event.which)) {
+      if ([38, 40].indexOf(event.which) > -1) {
         let current = this.selection.current;
         if (event.which === 38) {
           current = this.getPreviousModel(current);

@@ -31,10 +31,10 @@ export default Marionette.CollectionView.extend({
     }
   },
 
-  onCurrent(model) {
-    console.log('onCurrent');
+  onCurrent(model, isSelected) {
+    console.log('onCurrent', isSelected);
     if (model) {
-      this.children.findByModel(model).setCurrent();
+      this.children.findByModel(model).setCurrent(isSelected);
     }
   },
 

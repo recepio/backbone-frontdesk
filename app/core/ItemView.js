@@ -8,8 +8,11 @@ export default Marionette.View.extend({
     'click': 'click:item'
   },
 
-  setCurrent() {
-    this.$el.focus();
+  setCurrent(isSelected) {
+    this.$el.toggleClass('current', isSelected);
+    if (isSelected) {
+      this.$el.focus();
+    }
   },
 
   setSelected(selected) {

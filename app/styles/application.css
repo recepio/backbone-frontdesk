@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
   font-family: -apple-system, system, sans-serif;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .tables {
   display: flex;
