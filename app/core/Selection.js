@@ -1,24 +1,31 @@
 import Marionette from 'backbone.marionette';
 
 export default Marionette.Object.extend({
-  initialize(options) {
+  initialize() {
     this.selection = [];
+    this.current = null;
   },
 
   select(model, clear = true) {
     if (clear) {
       this.clear();
     }
-    this.triggerMethod('current', this.current, false);
+    if (this.current) {
+      this.triggerMethod('current', this.current, false);
+    }
     this.current = model;
-    this.triggerMethod('current', model, true);
     if (model) {
+      this.triggerMethod('current', model, true);
       this.selection.push(model);
       this.triggerMethod('select', model, true);
     }
   },
 
   deselect(model) {
+    if (this.current === model) {
+      this.triggerMethod('current', this.current, false);
+      this.current = null;
+    }
     const i = this.selection.indexOf(model);
     if (i !== -1) {
       this.selection.splice(i, 1);

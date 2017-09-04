@@ -8,6 +8,7 @@ export default Marionette.CollectionView.extend({
 
   initialize(options) {
     if (options.selection) {
+      this.removedIndex = -1;
       this.selection = options.selection;
       this.listenTo(this.selection, 'current', this.onCurrent);
       this.listenTo(this.selection, 'select', this.onSelect);
@@ -33,30 +34,42 @@ export default Marionette.CollectionView.extend({
 
   onCurrent(model, isSelected) {
     console.log('onCurrent', isSelected);
-    if (model) {
+    const childView = this.children.findByModel(model);
+    if (childView) {
       this.children.findByModel(model).setCurrent(isSelected);
     }
   },
 
   onSelect(model, selected) {
     console.log('onSelect', selected);
-    this.children.findByModel(model).setSelected(selected);
+    const childView = this.children.findByModel(model);
+    if (childView) {
+      childView.setSelected(selected);
+    }
   },
 
   onBeforeRemove(model) {
     if (this.selection) {
       this.selection.deselect(model);
+      const childView = this.children.findByModel(model);
+      if (childView) {
+        for (let i = 0; i < this.children.length; i++) {
+          if (this.children.findByIndex(i) === childView) {
+            this.removedIndex = i;
+            break;
+          }
+        }
+      }
     }
   },
 
   onRemove(model, collection, options) {
     if (this.selection) {
       _.defer(() => {
-        let position = options.index;
-        if (position >= this.collection.length) {
-          position = this.collection.length - 1;
+        if (this.removedIndex >= this.children.length) {
+          this.removedIndex = this.children.length - 1;
         }
-        const current = this.collection.length ? this.collection.at(position) : null;
+        const current = this.children.length ? this.children.findByIndex(this.removedIndex).model : null;
         this.selection.select(current);
       });
     }
