@@ -15,6 +15,13 @@ export default Marionette.CollectionView.extend({
     }
   },
 
+  onRender() {
+    this.selection.getSelected().each(model => this.onSelect(model, true));
+    if (this.selection.current) {
+      this.onCurrent(this.selection.current, true);
+    }
+  },
+
   onChildviewClickItem(childView, event) {
     if (this.selection) {
       if (!event.ctrlKey && !event.metaKey) {
@@ -36,7 +43,7 @@ export default Marionette.CollectionView.extend({
     console.log('onCurrent', isSelected);
     const childView = this.children.findByModel(model);
     if (childView) {
-      this.children.findByModel(model).setCurrent(isSelected);
+      childView.setCurrent(isSelected);
     }
   },
 
